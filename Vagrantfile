@@ -2,6 +2,7 @@ Vagrant.configure(2) do |config|
   #config.vm.box = "centos/7"
   config.vm.box = "carlosefr/centos-7"
 	config.vm.define "controller" do |controller|
+  config.vm.provision "shell", inline: "swapoff -a"
     (1..2).each do |i|
       config.vm.define "worker#{i}" do |node|
       config.vm.network "private_network", ip: "192.168.111.#{i+1}"
