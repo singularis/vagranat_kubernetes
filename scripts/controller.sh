@@ -20,10 +20,10 @@ PACKER_VERSION="1.2.4"
 
 # install packages
 if [ ${REDHAT_BASED} ] ; then
-  yum -y update
-  yum install -y unzip wget git bashcompletion
+  sudo yum -y update
+  sudo yum install -y unzip wget git bashcompletion
   git clone https://github.com/sandervanvugt/kubernetes.git
-  cd kubernetes/
+  sudo cd kubernetes/
   sudo ./setup-docker.sh 
   sudo ./setup-kubetools.sh 
   kubeadm init
@@ -32,9 +32,9 @@ if [ ${REDHAT_BASED} ] ; then
   sudo chown $(id -u):$(id -g) $HOME/.kube/config
   kubectl create -f https://docs.projectcalico.org/manifests/calico.yaml
 else 
-  apt-get -y update
-  apt-get install -y unzip wget git bashcompletion
-  git clone https://github.com/sandervanvugt/kubernetes.git
+  sudo apt-get -y update
+  sudo apt-get install -y unzip wget git bashcompletion
+  sudo git clone https://github.com/sandervanvugt/kubernetes.git
   cd kubernetes/
   sudo ./setup-docker.sh 
   sudo ./setup-kubetools.sh 
