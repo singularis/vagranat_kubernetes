@@ -54,7 +54,11 @@ usermod -aG docker vagrant
 echo 'source <(kubectl completion bash)' >>~/.bashrc
 kubectl completion bash >/etc/bash_completion.d/kubectl
 kubeadm init --pod-network-cidr=192.168.4.0/16 --apiserver-advertise-address=192.168.4.110
-kube cluster info
+sudo runuser -l vagrant -c 'sudo mkdir -p /home/vagrant/.kube'
+sudo runuser -l vagrant -c 'sudo cp -i /etc/kubernetes/admin.conf /home/vagrant/.kube'
+sudo runuser -l vagrant -c 'sudo chown $(id -u):$(id -g)  /home/vagrant/.kube/config'
+sudo kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
+kubectl cluster-info 
 SCRIPT
 
 $hosts = <<-SCRIPT

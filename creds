@@ -1,0 +1,2 @@
+kubeadm join 192.168.4.110:6443 --token wspi0q.id586ut1gktkzgp1 \
+--discovery-token-ca-cert-hash sha256:5f66535ee42569b1cb4d4f176c41100eaa5e0e26b60c7ca1dc915a99bcec0aad
