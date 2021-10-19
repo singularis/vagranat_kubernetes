@@ -29,7 +29,7 @@ Vagrant.configure("2") do |config|
 
 $worker = <<-SCRIPT
 echo "I am provisioning..."
-sudo yum install git curl vim wget bash-completion -y
+sudo yum install git curl vim wget bash-completion etcd -y
 git clone https://github.com/singularis/cka.git
 cd cka
 chmod +x setup-docker.sh 
