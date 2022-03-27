@@ -3,7 +3,7 @@ Vagrant.configure("2") do |config|
   #config.vm.box = "carlosefr/centos-7"
   (1..3).each do |i|
     config.vm.define "worker#{i}" do |worker|
-      worker.vm.network "private_network", ip: "192.168.4.11#{i}"
+      worker.vm.network "private_network", ip: "192.168.60.11#{i}"
       worker.vm.hostname = "worker#{i}"
       worker.vm.provision "shell", inline: "swapoff -a"
       worker.vm.provision "shell", inline: $worker
@@ -15,7 +15,7 @@ Vagrant.configure("2") do |config|
       end
     end
     config.vm.define "controller" do |controller|
-      controller.vm.network "private_network", ip: "192.168.4.110"
+      controller.vm.network "private_network", ip: "192.168.60.110"
       controller.vm.hostname = "controller"
       controller.vm.provision "shell", inline: "swapoff -a"
       controller.vm.provision "shell", inline: $controller
@@ -64,10 +64,10 @@ SCRIPT
 $hosts = <<-SCRIPT
 cat >> /etc/hosts << EOF
 {
-192.168.4.110 contorl.example.com control
-192.168.4.111 worker1.example.com worker1
-192.168.4.112 worker2.example.com worker2
-192.168.4.111 worker3.example.com worker3
+192.168.60.110 contorl.example.com control
+192.168.60.111 worker1.example.com worker1
+192.168.60.112 worker2.example.com worker2
+192.168.60.111 worker3.example.com worker3
   }
 EOF
 SCRIPT
