@@ -1,5 +1,5 @@
 Vagrant.configure("2") do |config|
-  config.vm.box = "centos/7"
+  config.vm.box = "fedora/35-cloud-base"
   #config.vm.box = "carlosefr/centos-7"
   (1..3).each do |i|
     config.vm.define "worker#{i}" do |worker|
