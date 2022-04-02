@@ -1,7 +1,7 @@
 Vagrant.configure("2") do |config|
   config.vm.box = "ubuntu/jammy64"
   #config.vm.box = "carlosefr/centos-7"
-  (1..1).each do |i|
+  (1..4).each do |i|
     config.vm.define "worker#{i}" do |worker|
       worker.vm.network "private_network", ip: "192.168.60.11#{i}"
       worker.vm.hostname = "worker#{i}"
