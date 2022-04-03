@@ -4,6 +4,7 @@ Vagrant.configure("2") do |config|
   (1..4).each do |i|
     config.vm.define "worker#{i}" do |worker|
       worker.vm.network "private_network", ip: "192.168.60.11#{i}"
+      worker.vm.network "forwarded_port", guest: 80, host: "908#{i}"
       worker.vm.hostname = "worker#{i}"
       worker.vm.provision "shell", inline: "sudo swapoff -a"
       worker.vm.provision "shell", inline: $worker_ubuntu
@@ -16,10 +17,12 @@ Vagrant.configure("2") do |config|
     end
     config.vm.define "controller" do |controller|
       controller.vm.network "private_network", ip: "192.168.60.110"
+      controller.vm.network "forwarded_port", guest: 80, host: 9080
       controller.vm.hostname = "controller"
       controller.vm.provision "shell", inline: "sudo swapoff -a"
       controller.vm.provision "shell", inline: $controller_ubuntu
       controller.vm.provision "shell", inline: $hosts
+      config.vm.synced_folder "vagrant_sync", "/vagrant"
       controller.vm.provider "virtualbox" do |v|
         v.memory = 2048
         v.cpus = 2
