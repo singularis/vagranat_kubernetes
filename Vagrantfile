@@ -1,10 +1,11 @@
 Vagrant.configure("2") do |config|
   config.vm.box = "ubuntu/jammy64"
   #config.vm.box = "carlosefr/centos-7"
-  (1..4).each do |i|
+  (1..2).each do |i|
     config.vm.define "worker#{i}" do |worker|
       worker.vm.network "private_network", ip: "192.168.60.11#{i}"
       worker.vm.network "forwarded_port", guest: 80, host: "908#{i}"
+      worker.vm.base_mac = nil
       worker.vm.hostname = "worker#{i}"
       worker.vm.provision "shell", inline: "sudo swapoff -a"
       worker.vm.provision "shell", inline: $worker_ubuntu
@@ -19,6 +20,7 @@ Vagrant.configure("2") do |config|
       controller.vm.network "private_network", ip: "192.168.60.110"
       controller.vm.network "forwarded_port", guest: 80, host: 9080
       controller.vm.hostname = "controller"
+      controller.vm.base_mac = nil
       controller.vm.provision "shell", inline: "sudo swapoff -a"
       controller.vm.provision "shell", inline: $controller_ubuntu
       controller.vm.provision "shell", inline: $hosts
