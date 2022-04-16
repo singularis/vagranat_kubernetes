@@ -13,6 +13,7 @@ Vagrant.configure("2") do |config|
       worker.vm.provider "virtualbox" do |v|
         v.memory = 1024
         v.cpus = 1
+        v.customize ["modifyvm", :id, "--cableconnected1", "on"]
         end
       end
     end
@@ -28,6 +29,7 @@ Vagrant.configure("2") do |config|
       controller.vm.provider "virtualbox" do |v|
         v.memory = 2048
         v.cpus = 2
+        v.customize ["modifyvm", :id, "--cableconnected1", "on"]
         end
       end
     end
