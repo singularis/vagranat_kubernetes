@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: lab1
+  namespace: mynamespace
+spec:
+  containers:
+  - name: nginx
+    image: alpine
+    command: ['sh', '-c', 'sleep 3600']
+  restartPolicy: OnFailure
+
+

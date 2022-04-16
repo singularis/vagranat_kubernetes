@@ -1,0 +1,17 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: lab5
+  namespace: task5
+spec:
+  parallelism: 1
+  completions: 1
+  template:
+    spec:
+      containers:
+      - name: xxaazz-pod
+        image: alpine
+        command: ["sh",  "-c","sleep 3600"]
+      restartPolicy: Never
+  backoffLimit: 4
+

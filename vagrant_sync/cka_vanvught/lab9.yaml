@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: lab9
+spec:
+  selector:
+    name: lab9
+  ports:
+  - name: foo # Actually, no port is needed.
+    port: 80
+    targetPort: 9376
+    protocol: TCP
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: lab9
+  labels:
+    name: lab9
+spec:
+  hostname: busy33
+  subdomain: default-subdomain
+  containers:
+  - image: busybox
+    command:
+      - sleep
+      - "3600"
+    name: busy33

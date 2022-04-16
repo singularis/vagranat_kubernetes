@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: lab8-daemon
+  labels:
+    lab: lab8
+spec:
+  selector:
+    matchLabels:
+      name: lab8
+  template:
+    metadata:
+      labels:
+        name: lab8
+    spec:
+      tolerations:
+      # this toleration is to have the daemonset runnable on master nodes
+      # remove it if your masters can't run pods
+      - key: node-role.kubernetes.io/master
+        operator: Exists
+        effect: NoSchedule
+      containers:
+      - name: lab8
+        image: nginx
